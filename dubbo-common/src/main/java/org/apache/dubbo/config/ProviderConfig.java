@@ -27,6 +27,10 @@ import java.util.Arrays;
  * @export
  * @see org.apache.dubbo.config.ProtocolConfig
  * @see ServiceConfigBase
+ *
+ * 这个就是服务提供者 提供的服务数据 组装的 对象，理解应该就是拿这个对象序列化后 传入到配置中心的
+ *
+ * 或者说是 云服务中的 etcd 中
  */
 public class ProviderConfig extends AbstractServiceConfig {
 
@@ -36,6 +40,8 @@ public class ProviderConfig extends AbstractServiceConfig {
 
     /**
      * Service ip addresses (used when there are multiple network cards available)
+     *
+     * 服务ip地址(当有多个网卡可用时使用)
      */
     private String host;
 
@@ -46,6 +52,8 @@ public class ProviderConfig extends AbstractServiceConfig {
 
     /**
      * Context path
+     *
+     * 上下文路径
      */
     private String contextpath;
 
@@ -61,96 +69,133 @@ public class ProviderConfig extends AbstractServiceConfig {
 
     /**
      * Thread pool size (fixed size)
+     *
+     * 线程池大小(固定大小)
      */
     private Integer threads;
 
     /**
      * IO thread pool size (fixed size)
+     *
+     * IO线程池大小(固定大小)
      */
     private Integer iothreads;
 
     /**
      * Thread pool keepAliveTime, default unit TimeUnit.MILLISECONDS
+     *
+     * 线程池keepAliveTime，默认单位TimeUnit。毫秒
      */
     private Integer alive;
 
     /**
      * Thread pool queue length
+     *
+     * 线程池队列长度
      */
     private Integer queues;
 
     /**
      * Max acceptable connections
+     *
+     * 最大可接受的连接
      */
     private Integer accepts;
 
     /**
      * Protocol codec
+     *
+     * 协议编解码器
      */
     private String codec;
 
     /**
      * The serialization charset
+     *
+     * 序列化字符集
      */
     private String charset;
 
     /**
      * Payload max length
+     *
+     * 有效载荷最大长度
      */
     private Integer payload;
 
     /**
      * The network io buffer size
+     *
+     * 网络io缓冲区大小
      */
     private Integer buffer;
 
     /**
      * Transporter
+     * 运输者
      */
     private String transporter;
 
     /**
      * How information gets exchanged
+     *
+     * 信息是如何交换的
      */
     private String exchanger;
 
     /**
      * Thread dispatching mode
+     *
+     * 线程调度模式
      */
     private String dispatcher;
 
     /**
      * Networker
+     *
+     * 沟通者
      */
     private String networker;
 
     /**
      * The server-side implementation model of the protocol
+     *
+     * 协议的服务器端实现模型
      */
     private String server;
 
     /**
      * The client-side implementation model of the protocol
+     *
+     * 协议的客户端实现模型
      */
     private String client;
 
     /**
      * Supported telnet commands, separated with comma.
+     *
+     * 支持telnet命令，用逗号分隔。
      */
     private String telnet;
 
     /**
      * Command line prompt
+     *
+     * 命令行提示符
      */
     private String prompt;
 
     /**
      * Status check
+     *
+     * 状态检查
      */
     private String status;
 
     /**
      * Wait time when stop
+     *
+     * 停车等待时间
      */
     private Integer wait;
 

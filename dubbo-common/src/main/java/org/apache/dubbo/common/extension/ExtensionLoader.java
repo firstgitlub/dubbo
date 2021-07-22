@@ -799,11 +799,17 @@ public class ExtensionLoader<T> {
     }
 
     private Map<String, Class<?>> getExtensionClasses() {
+
+        // 同样的首先尝试从缓存中获取
         Map<String, Class<?>> classes = cachedClasses.get();
         if (classes == null) {
             synchronized (cachedClasses) {
+
+                // double check，二次检查
                 classes = cachedClasses.get();
                 if (classes == null) {
+
+                    /* 加载扩展点class */
                     classes = loadExtensionClasses();
                     cachedClasses.set(classes);
                 }
@@ -821,6 +827,8 @@ public class ExtensionLoader<T> {
         Map<String, Class<?>> extensionClasses = new HashMap<>();
 
         for (LoadingStrategy strategy : strategies) {
+
+            /* 加载META-INF/dubbo/internal/、META-INF/dubbo/、META-INF/services/ 三个目录下的文件 */
             loadDirectory(extensionClasses, strategy.directory(), type.getName(), strategy.preferExtensionClassLoader(),
                     strategy.overridden(), strategy.excludedPackages());
             loadDirectory(extensionClasses, strategy.directory(), type.getName().replace("org.apache", "com.alibaba"),
@@ -834,18 +842,25 @@ public class ExtensionLoader<T> {
      * extract and cache default extension name if exists
      */
     private void cacheDefaultExtensionName() {
+
+        // 获取@SPI注解信息
         final SPI defaultAnnotation = type.getAnnotation(SPI.class);
         if (defaultAnnotation == null) {
             return;
         }
 
+        // 获取默认值
         String value = defaultAnnotation.value();
         if ((value = value.trim()).length() > 0) {
             String[] names = NAME_SEPARATOR.split(value);
             if (names.length > 1) {
+
+                // 默认扩展点只能有一个
                 throw new IllegalStateException("More than 1 default extension name on extension " + type.getName()
                         + ": " + Arrays.toString(names));
             }
+
+            // 如果默认扩展点名称唯一，缓存默认扩展点名称
             if (names.length == 1) {
                 cachedDefaultName = names[0];
             }
@@ -858,6 +873,7 @@ public class ExtensionLoader<T> {
 
     private void loadDirectory(Map<String, Class<?>> extensionClasses, String dir, String type,
                                boolean extensionLoaderClassLoaderFirst, boolean overridden, String... excludedPackages) {
+        // 目录+接口名
         String fileName = dir + type;
         try {
             Enumeration<java.net.URL> urls = null;
@@ -871,6 +887,7 @@ public class ExtensionLoader<T> {
                 }
             }
 
+            // 加载文件资源
             if (urls == null || !urls.hasMoreElements()) {
                 if (classLoader != null) {
                     urls = classLoader.getResources(fileName);
@@ -897,7 +914,10 @@ public class ExtensionLoader<T> {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceURL.openStream(), StandardCharsets.UTF_8))) {
                 String line;
                 String clazz = null;
+
+                // 读取一行
                 while ((line = reader.readLine()) != null) {
+                    // #号代表注释，要忽略掉
                     final int ci = line.indexOf('#');
                     if (ci >= 0) {
                         line = line.substring(0, ci);
@@ -906,7 +926,9 @@ public class ExtensionLoader<T> {
                     if (line.length() > 0) {
                         try {
                             String name = null;
+                            // =号前为key
                             int i = line.indexOf('=');
+                            // =号后为value
                             if (i > 0) {
                                 name = line.substring(0, i).trim();
                                 clazz = line.substring(i + 1).trim();
@@ -1060,21 +1082,29 @@ public class ExtensionLoader<T> {
 
     @SuppressWarnings("deprecation")
     private String findAnnotationName(Class<?> clazz) {
+
+        // 获取class上的@Extension注解信息
         org.apache.dubbo.common.Extension extension = clazz.getAnnotation(org.apache.dubbo.common.Extension.class);
         if (extension != null) {
+            // 注解不为null则直接用注解的value作为name
             return extension.value();
         }
 
         String name = clazz.getSimpleName();
         if (name.endsWith(type.getSimpleName())) {
+
+            // 这里的截取方式与上文中介绍的方式相同
             name = name.substring(0, name.length() - type.getSimpleName().length());
         }
+        // 同样转换为小写返回
         return name.toLowerCase();
     }
 
     @SuppressWarnings("unchecked")
     private T createAdaptiveExtension() {
         try {
+
+            /* 获取自适应扩展点实例，并进行注入 */
             return injectExtension((T) getAdaptiveExtensionClass().newInstance());
         } catch (Exception e) {
             throw new IllegalStateException("Can't create adaptive extension " + type + ", cause: " + e.getMessage(), e);
@@ -1082,18 +1112,30 @@ public class ExtensionLoader<T> {
     }
 
     private Class<?> getAdaptiveExtensionClass() {
+
+        /* 获取扩展点class */
         getExtensionClasses();
         if (cachedAdaptiveClass != null) {
+
+            // 如果缓存的自适应扩展点class不为null，直接返回
             return cachedAdaptiveClass;
         }
+
+        /* 创建自适应扩展点class并返回 */
         return cachedAdaptiveClass = createAdaptiveExtensionClass();
     }
 
     private Class<?> createAdaptiveExtensionClass() {
+
+        // 拼接自适应扩展点class的字符串
         String code = new AdaptiveClassCodeGenerator(type, cachedDefaultName).generate();
         ClassLoader classLoader = findClassLoader();
+
+        // 获取编译器
         org.apache.dubbo.common.compiler.Compiler compiler =
                 ExtensionLoader.getExtensionLoader(org.apache.dubbo.common.compiler.Compiler.class).getAdaptiveExtension();
+
+        // 编译字符串为class
         return compiler.compile(code, classLoader);
     }
 

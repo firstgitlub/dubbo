@@ -55,6 +55,8 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
 
     /**
      * The interface name of the exported service
+     *
+     * 导出服务的接口名称
      */
     protected String interfaceName;
     /**

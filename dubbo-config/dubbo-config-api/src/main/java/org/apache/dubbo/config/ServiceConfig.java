@@ -309,6 +309,8 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> {
         if (unexported) {
             throw new IllegalStateException("The service " + interfaceClass.getName() + " has already unexported!");
         }
+
+        // 暴露过直接返回
         if (exported) {
             return;
         }
