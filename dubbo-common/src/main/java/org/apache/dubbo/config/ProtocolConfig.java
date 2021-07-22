@@ -41,6 +41,8 @@ public class ProtocolConfig extends AbstractConfig {
 
     /**
      * Service ip address (when there are multiple network cards available)
+     *
+     * 业务ip地址(有多个网卡时)
      */
     private String host;
 

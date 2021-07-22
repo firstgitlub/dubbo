@@ -52,8 +52,10 @@ public class DubboNamespaceHandler extends NamespaceHandlerSupport implements Co
         Version.checkDuplicate(DubboNamespaceHandler.class);
     }
 
+    // 对应handler 会去注册 对应的标签解析器
     @Override
     public void init() {
+        // 我们看到，dubbo的各个标签都是通过 DubboBeanDefinitionParser 来解析的
         registerBeanDefinitionParser("application", new DubboBeanDefinitionParser(ApplicationConfig.class, true));
         registerBeanDefinitionParser("module", new DubboBeanDefinitionParser(ModuleConfig.class, true));
         registerBeanDefinitionParser("registry", new DubboBeanDefinitionParser(RegistryConfig.class, true));
