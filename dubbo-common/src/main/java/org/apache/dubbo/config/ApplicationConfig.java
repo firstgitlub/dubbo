@@ -106,21 +106,29 @@ public class ApplicationConfig extends AbstractConfig {
 
     /**
      * Monitor center
+     *
+     * 监控中心
      */
     private MonitorConfig monitor;
 
     /**
      * Directory for saving thread dump
+     *
+     * 保存线程转储的目录
      */
     private String dumpDirectory;
 
     /**
      * Whether to enable qos or not
+     *
+     * 是否启用qos
      */
     private Boolean qosEnable;
 
     /**
      * The qos host to listen
+     *
+     * 要侦听的qos主机
      */
     private String qosHost;
 
@@ -148,6 +156,9 @@ public class ApplicationConfig extends AbstractConfig {
 
     /**
      * Metadata type, local or remote, if choose remote, you need to further specify metadata center.
+     *
+     * 元数据类型:本地或远程，如果选择远程，需要进一步指定元数据中心
+     *
      */
     private String metadataType;
 

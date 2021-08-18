@@ -189,6 +189,7 @@ public class DubboBootstrap {
      * See {@link ApplicationModel} and {@link ExtensionLoader} for why DubboBootstrap is designed to be singleton.
      */
     public static DubboBootstrap getInstance() {
+        // 线程安全
         if (instance == null) {
             synchronized (DubboBootstrap.class) {
                 if (instance == null) {
@@ -200,10 +201,14 @@ public class DubboBootstrap {
     }
 
     private DubboBootstrap() {
+        // 配置管理
         configManager = ApplicationModel.getConfigManager();
+        // 环境
         environment = ApplicationModel.getEnvironment();
 
+        // 注册钩子  用于JVM退出的时候 做销毁动作
         DubboShutdownHook.getDubboShutdownHook().register();
+        // 增加回调  这里的回调 是在 上面钩子中 被调用的
         ShutdownHookCallbacks.INSTANCE.addCallback(DubboBootstrap.this::destroy);
     }
 
@@ -652,9 +657,14 @@ public class DubboBootstrap {
      * For compatibility purpose, use registry as the default config center when
      * there's no config center specified explicitly and
      * useAsConfigCenter of registryConfig is null or true
+     *
+     * 出于兼容性的目的，当没有显式指定配置中心且 registryConfig 的
+     * useAsConfigCenter为null或true时，使用registry作为默认配置中心
+     *
      */
     private void useRegistryAsConfigCenterIfNecessary() {
         // we use the loading status of DynamicConfiguration to decide whether ConfigCenter has been initiated.
+        // 我们使用 DynamicConfiguration 的加载状态来决定 ConfigCenter 是否已经启动。
         if (environment.getDynamicConfiguration().isPresent()) {
             return;
         }

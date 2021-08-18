@@ -69,7 +69,10 @@ public class DubboShutdownHook extends Thread {
             logger.info("Run shutdown hook now.");
         }
 
+        // 回调 调用
         callback();
+
+        // 销毁 调用
         doDestroy();
     }
 
@@ -88,6 +91,7 @@ public class DubboShutdownHook extends Thread {
      * Register the ShutdownHook
      */
     public void register() {
+        // 基于CAS 通过native方法  判断对象在内存中的位置偏移量
         if (registered.compareAndSet(false, true)) {
             destroyed.set(false);
             DubboShutdownHook dubboShutdownHook = getDubboShutdownHook();
@@ -109,6 +113,8 @@ public class DubboShutdownHook extends Thread {
 
     /**
      * Destroy all the resources, including registries and protocols.
+     *
+     * 销毁所有资源，包括注册表和协议。
      */
     public void doDestroy() {
         // dispatch the DubboDestroyedEvent @since 2.7.5

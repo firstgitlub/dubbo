@@ -112,11 +112,16 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> {
 
     /**
      * A random port cache, the different protocols who has no port specified have different random port
+     *
+     * 一个随机端口缓存，没有指定端口的不同协议有不同的随机端口
      */
     private static final Map<String, Integer> RANDOM_PORT_MAP = new HashMap<String, Integer>();
 
     /**
      * A delayed exposure service timer
+     *
+     * 延迟公开服务计时器
+     *
      */
     private static final ScheduledExecutorService DELAY_EXPORT_EXECUTOR =
             Executors.newSingleThreadScheduledExecutor(new NamedThreadFactory("DubboServiceDelayExporter", true));
@@ -128,6 +133,9 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> {
     /**
      * A {@link ProxyFactory} implementation that will generate a exported service proxy,the JavassistProxyFactory is its
      * default implementation
+     *
+     * 一个将生成导出服务代理的ProxyFactory实现，JavassistProxyFactory是它的默认实现
+     *
      */
     private static final ProxyFactory PROXY_FACTORY = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
 
@@ -214,6 +222,8 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> {
         if (bootstrap == null) {
             bootstrap = DubboBootstrap.getInstance();
             // compatible with api call.
+            // 兼容API调用。
+            // 这里是注册中心的地址
             if (null != this.getRegistry()) {
                 bootstrap.registries(this.getRegistries());
             }

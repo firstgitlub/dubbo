@@ -31,32 +31,43 @@ public abstract class AbstractMethodConfig extends AbstractConfig {
 
     /**
      * The timeout for remote invocation in milliseconds
+     *
+     * 远程调用的超时时间，单位为毫秒
      */
     protected Integer timeout;
 
     /**
      * The retry times
+     * 重试次数
      */
     protected Integer retries;
 
     /**
      * max concurrent invocations
+     *
+     * 最大并发调用
      */
     protected Integer actives;
 
     /**
      * The load balance
+     * 负载均衡
      */
     protected String loadbalance;
 
     /**
      * Whether to async
      * note that: it is an unreliable asynchronism that ignores return values and does not block threads.
+     *
+     * 是否异步请注意:忽略返回值且不阻塞线程的异步是不可靠的。
+     *
      */
     protected Boolean async;
 
     /**
      * Whether to ack async-sent
+     *
+     * 是否 ack 异步发送
      */
     protected Boolean sent;
 
@@ -65,33 +76,51 @@ public abstract class AbstractMethodConfig extends AbstractConfig {
      * <p>
      * note that: the mock doesn't support on the provider side，and the mock is executed when a non-business exception
      * occurs after a remote service call
+     *
+     * 当服务执行失败时调用的模拟类的名称
+     *
      */
     protected String mock;
 
     /**
      * Merger
+     *
+     * 合并 并购 吸收
+     *
      */
     protected String merger;
 
     /**
      * Cache the return result with the call parameter as key, the following options are available: lru, threadlocal,
      * jcache, etc.
+     *
+     * 用调用参数作为键缓存返回结果，有以下选项:lru, threadlocal, jcache等。
+     *
      */
     protected String cache;
 
     /**
      * Whether JSR303 standard annotation validation is enabled or not, if enabled, annotations on method parameters will
      * be validated
+     *
+     * 无论是否启用JSR303标准注释验证，如果启用，则对方法参数上的注释进行验证
+     *
      */
     protected String validation;
 
     /**
      * The customized parameters
+     *
+     * 自定义参数
+     *
      */
     protected Map<String, String> parameters;
 
     /**
      * Forks for forking cluster
+     *
+     * 分叉群集
+     *
      */
     protected Integer forks;
 

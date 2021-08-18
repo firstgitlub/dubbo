@@ -50,6 +50,8 @@ import static org.apache.dubbo.common.utils.ReflectUtils.findMethodByMethodSigna
 /**
  * Utility methods and public methods for parsing configuration
  *
+ * 解析配置的实用程序方法和公共方法
+ *
  * @export
  */
 public abstract class AbstractConfig implements Serializable {
@@ -59,11 +61,16 @@ public abstract class AbstractConfig implements Serializable {
 
     /**
      * The legacy properties container
+     *
+     * 遗留属性容器
+     *
      */
     private static final Map<String, String> LEGACY_PROPERTIES = new HashMap<String, String>();
 
     /**
      * The suffix container
+     *
+     * 后缀容器
      */
     private static final String[] SUFFIXES = new String[]{"Config", "Bean", "ConfigBase"};
 
@@ -80,6 +87,8 @@ public abstract class AbstractConfig implements Serializable {
 
     /**
      * The config id
+     *
+     * 配置id
      */
     protected String id;
     protected String prefix;
@@ -110,6 +119,7 @@ public abstract class AbstractConfig implements Serializable {
                 break;
             }
         }
+        // 按照 split 切分 tag
         return StringUtils.camelToSplitName(tag, "-");
     }
 
@@ -472,6 +482,7 @@ public abstract class AbstractConfig implements Serializable {
         try {
             CompositeConfiguration compositeConfiguration = env.getPrefixedConfiguration(this);
             // loop methods, get override value and set the new value back to method
+            // 循环方法，获取重写值并将新值设置回方法
             Method[] methods = getClass().getMethods();
             for (Method method : methods) {
                 if (MethodUtils.isSetter(method)) {

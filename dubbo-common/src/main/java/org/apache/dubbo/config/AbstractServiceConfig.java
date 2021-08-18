@@ -52,6 +52,8 @@ public abstract class AbstractServiceConfig extends AbstractInterfaceConfig {
 
     /**
      * The time delay register service (milliseconds)
+     *
+     * 延时注册服务(毫秒)
      */
     protected Integer delay;
 

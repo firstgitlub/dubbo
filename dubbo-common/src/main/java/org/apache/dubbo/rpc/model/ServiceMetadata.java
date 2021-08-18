@@ -27,6 +27,9 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * data related to service level such as name, version, classloader of business service,
  * security info, etc. Also with a AttributeMap for extension.
+ *
+ * 注意，这个类目前在Dubbo中没有使用。与服务级别相关的数据，如名称、版本、业务服务的类加载器、安全信息等。还有一个用于扩展的AttributeMap。
+ *
  */
 public class ServiceMetadata extends BaseServiceMetadata {
 
@@ -36,6 +39,7 @@ public class ServiceMetadata extends BaseServiceMetadata {
     private Object target;
 
     /* will be transferred to remote side */
+    // 会被转移到远端
     private final Map<String, Object> attachments = new ConcurrentHashMap<String, Object>();
     /* used locally*/
     private final Map<String, Object> attributeMap = new ConcurrentHashMap<String, Object>();

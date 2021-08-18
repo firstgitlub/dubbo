@@ -24,6 +24,7 @@ import static org.apache.dubbo.common.constants.CommonConstants.DEFAULT_VERSION;
  * 2019-10-10
  */
 public class BaseServiceMetadata {
+    // separator :分隔符
     public static final char COLON_SEPARATOR = ':';
 
     protected String serviceKey;
@@ -59,6 +60,7 @@ public class BaseServiceMetadata {
         return serviceKey.substring(0, index);
     }
 
+    // 这些都是基于字符串 索引切割 实现
     public static String interfaceFromServiceKey(String serviceKey) {
         int groupIndex = serviceKey.indexOf("/");
         int versionIndex = serviceKey.indexOf(":");
@@ -86,6 +88,8 @@ public class BaseServiceMetadata {
 
     /**
      * revert of org.apache.dubbo.common.ServiceDescriptor#getDisplayServiceKey()
+     *
+     * 展示数据 与 元数据对象  之间的转换
      *
      * @param displayKey
      * @return

@@ -117,7 +117,11 @@ public class MethodConfig extends AbstractMethodConfig {
     private List<ArgumentConfig> arguments;
 
     /**
-     * These properties come from MethodConfig's parent Config module, they will neither be collected directly from xml or API nor be delivered to url
+     * These properties come from MethodConfig's parent Config module,
+     * they will neither be collected directly from xml or API nor be delivered to url
+     *
+     * 这些属性来自MethodConfig的父模块Config，它们既不会直接从xml或API收集，也不会传递到url
+     *
      */
     private String service;
     private String serviceId;

@@ -61,64 +61,96 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
     protected String interfaceName;
     /**
      * The remote service version the customer/provider side will reference
+     *
+     * 客户/提供者端 将引用的远程服务版本
      */
     protected String version;
 
     /**
      * The remote service group the customer/provider side will reference
+     *
+     * 客户/提供者端 将引用的远程服务组
      */
     protected String group;
-    
+
+    /**
+     *
+     * 服务的元数据  但是此版本说 这个类还没有用到
+     */
     protected ServiceMetadata serviceMetadata;
     /**
      * Local impl class name for the service interface
+     *
+     * 服务接口的本地impl类名
      */
     protected String local;
 
     /**
      * Local stub class name for the service interface
+     *
+     * 服务接口的本地存根类名称
      */
     protected String stub;
 
     /**
      * Service monitor
+     *
+     * 服务监控
      */
     protected MonitorConfig monitor;
 
     /**
      * Strategies for generating dynamic agents，there are two strategies can be choosed: jdk and javassist
+     *
+     * 生成动态代理的策略，有两种策略可以选择: jdk 和 javassist
+     *
      */
     protected String proxy;
 
     /**
      * Cluster type
+     * 集群类型
      */
     protected String cluster;
 
     /**
      * The {@code Filter} when the provider side exposed a service or the customer side references a remote service used,
      * if there are more than one, you can use commas to separate them
+     *
+     * 当提供者端公开服务或客户端引用使用的远程服务时，筛选器，如果有多个，可以使用逗号分隔它们
+     *
      */
     protected String filter;
 
     /**
      * The Listener when the provider side exposes a service or the customer side references a remote service used
      * if there are more than one, you can use commas to separate them
+     *
+     * 当提供者端公开服务或客户端引用使用的远程服务(如果有多个)时，侦听器可以使用逗号分隔它们
+     *
      */
     protected String listener;
 
     /**
      * The owner of the service providers
+     *
+     * 服务提供者的所有者
+     *
      */
     protected String owner;
 
     /**
      * Connection limits, 0 means shared connection, otherwise it defines the connections delegated to the current service
+     *
+     * 连接限制，0表示共享连接，否则定义委托给当前服务的连接
+     *
      */
     protected Integer connections;
 
     /**
      * The layer of service providers
+     *
+     * 服务提供者层
      */
     protected String layer;
 
@@ -135,6 +167,9 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
     /**
      * The registry list the service will register to
      * Also see {@link #registryIds}, only one of them will work.
+     *
+     * 也可以查看 registryid，其中只有一个可以工作
+     *
      */
     protected List<RegistryConfig> registries;
 
@@ -159,6 +194,9 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
 
     /**
      * The metrics configuration
+     *
+     * 标准配置
+     *
      */
     protected MetricsConfig metrics;
     protected MetadataReportConfig metadataReportConfig;
@@ -166,8 +204,10 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
     protected ConfigCenterConfig configCenter;
 
     // callback limits
+    // 应该是回调次数的限制吧
     private Integer callbacks;
     // the scope for referring/exporting a service, if it's local, it means searching in current JVM only.
+    // 引用/导出服务的范围，如果它是本地的，这意味着只在当前JVM中搜索
     private String scope;
 
     protected String tag;
@@ -177,6 +217,8 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
 
     /**
      * The url of the reference service
+     *
+     * 引用服务的url
      */
     protected final List<URL> urls = new ArrayList<URL>();
 

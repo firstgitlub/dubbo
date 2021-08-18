@@ -511,7 +511,7 @@ public class ConfigManager extends LifecycleAdapter implements FrameworkExt {
             return;
         }
 
-        if (unique) { // check duplicate
+        if (unique) { // check duplicate  检查重复的
             configsMap.values().forEach(c -> {
                 checkDuplicate(c, config);
             });
