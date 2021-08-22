@@ -20,6 +20,9 @@ import java.util.NoSuchElementException;
 
 /**
  * Configuration interface, to fetch the value for the specified key.
+ *
+ * 配置接口，获取指定键的值。
+ *
  */
 public interface Configuration {
     /**

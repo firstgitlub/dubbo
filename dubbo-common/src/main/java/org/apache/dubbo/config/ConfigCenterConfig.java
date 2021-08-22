@@ -86,9 +86,14 @@ public class ConfigCenterConfig extends AbstractConfig {
      */
     private Map<String, String> parameters;
 
+    /******** 下面这两个什么差别 ******/
+
+    // 扩展配置  和 APP扩展配置
     private Map<String, String> externalConfiguration;
 
     private Map<String, String> appExternalConfiguration;
+
+    /**************/
 
     public ConfigCenterConfig() {
     }

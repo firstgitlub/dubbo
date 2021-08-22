@@ -19,12 +19,16 @@ package org.apache.dubbo.common.context;
 /**
  * The Lifecycle of Dubbo component
  *
+ * Dubbo组件的生命周期
+ *
  * @since 2.7.5
  */
 public interface Lifecycle {
 
     /**
      * Initialize the component before {@link #start() start}
+     *
+     * 在{@link #start() start}之前初始化组件
      *
      * @return current {@link Lifecycle}
      * @throws IllegalStateException
@@ -34,6 +38,8 @@ public interface Lifecycle {
     /**
      * Start the component
      *
+     * 启动组件
+     *
      * @return current {@link Lifecycle}
      * @throws IllegalStateException
      */
@@ -41,6 +47,8 @@ public interface Lifecycle {
 
     /**
      * Destroy the component
+     *
+     * 销毁组件
      *
      * @throws IllegalStateException
      */

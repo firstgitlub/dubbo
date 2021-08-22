@@ -86,6 +86,8 @@ public @interface Activate {
     /**
      * Absolute ordering info, optional
      *
+     * 绝对订货信息，可选
+     *
      * @return absolute ordering info
      */
     int order() default 0;

@@ -25,6 +25,7 @@ import java.util.Map;
 public class InmemoryConfiguration implements Configuration {
 
     // stores the configuration key-value pairs
+    // 内存中 存储
     private Map<String, String> store = new LinkedHashMap<>();
 
     @Override

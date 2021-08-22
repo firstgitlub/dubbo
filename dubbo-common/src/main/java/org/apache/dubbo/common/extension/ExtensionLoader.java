@@ -130,6 +130,8 @@ public class ExtensionLoader<T> {
     /**
      * Load all {@link Prioritized prioritized} {@link LoadingStrategy Loading Strategies} via {@link ServiceLoader}
      *
+     * 通过{@link ServiceLoader}加载所有{@link priorities priorities}
+     *
      * @return non-null
      * @since 2.7.7
      */
@@ -672,6 +674,7 @@ public class ExtensionLoader<T> {
 
     @SuppressWarnings("unchecked")
     private T createExtension(String name, boolean wrap) {
+        // 其中之一的情况时  这里已经拿到了 扩展的实现类
         Class<?> clazz = getExtensionClasses().get(name);
         if (clazz == null || unacceptableExceptions.contains(name)) {
             throw findException(name);
@@ -685,12 +688,15 @@ public class ExtensionLoader<T> {
             injectExtension(instance);
 
 
+            // 为否包装
             if (wrap) {
 
                 List<Class<?>> wrapperClassesList = new ArrayList<>();
                 if (cachedWrapperClasses != null) {
                     wrapperClassesList.addAll(cachedWrapperClasses);
                     wrapperClassesList.sort(WrapperComparator.COMPARATOR);
+
+                    // 反向
                     Collections.reverse(wrapperClassesList);
                 }
 
@@ -717,6 +723,7 @@ public class ExtensionLoader<T> {
         return getExtensionClasses().containsKey(name);
     }
 
+    // 通过反射 注入 扩展实例
     private T injectExtension(T instance) {
 
         if (objectFactory == null) {
@@ -766,6 +773,9 @@ public class ExtensionLoader<T> {
 
     /**
      * get properties name for setter, for instance: setVersion, return "version"
+     *
+     * 获取setter的属性名，例如setVersion，返回"version"
+     *
      * <p>
      * return "", if setter name with length less than 3
      */
