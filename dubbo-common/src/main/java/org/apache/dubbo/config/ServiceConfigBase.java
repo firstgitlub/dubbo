@@ -61,6 +61,8 @@ public abstract class ServiceConfigBase<T> extends AbstractServiceConfig {
 
     /**
      * The service name
+     *
+     * 服务名称
      */
     protected String path;
 

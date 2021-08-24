@@ -518,6 +518,8 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
 
     /**
      * Always use the global ApplicationConfig
+     *
+     * 始终使用全局ApplicationConfig
      */
     public ApplicationConfig getApplication() {
         ApplicationConfig globalApplication = ApplicationModel.getConfigManager().getApplicationOrElseThrow();

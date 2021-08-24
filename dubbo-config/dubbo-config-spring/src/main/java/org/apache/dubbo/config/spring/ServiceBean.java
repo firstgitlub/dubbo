@@ -36,6 +36,12 @@ import org.springframework.context.ApplicationEventPublisherAware;
  * ServiceFactoryBean
  *
  * https://blog.csdn.net/heroqiang/article/details/79189798
+ * https://blog.csdn.net/csdn_kenneth/article/details/82619828
+ *
+ * 本类实现了两个重要的机制：
+ * 一个是InitializingBean，当组件创建完对象以后会调用InitializingBean的唯一的方法 afterPropertiesSet，也就是在属性设置完以后来回调这个方法
+ *
+ *
  *
  * @export
  */
